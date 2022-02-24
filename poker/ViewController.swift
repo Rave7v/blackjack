@@ -5,23 +5,27 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var img1: UIImageView!
     @IBOutlet weak var img2: UIImageView!
+    var Aleat  = Int.random(in: 1...9)
+    var Aleat2 = Int.random(in: 1...9)
     var baraja = [#imageLiteral(resourceName: "1.png"),#imageLiteral(resourceName: "2.png"),#imageLiteral(resourceName: "3.png"),#imageLiteral(resourceName: "4.png"),#imageLiteral(resourceName: "6.png"),#imageLiteral(resourceName: "7.png"),#imageLiteral(resourceName: "8.png"),#imageLiteral(resourceName: "9.jpeg"),#imageLiteral(resourceName: "10.png"),#imageLiteral(resourceName: "11.png")]
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        img1.image = baraja[Aleat]
     }
 
     @IBAction func jugar(_ sender: UIButton) {
-        let Aleat = Int.random(in: 1...10)
-        let Aleat2 = Int.random(in: 1...10)
-        img1.image = baraja[Aleat]
+        Aleat2 = Int.random(in: 1...9)
         img2.image = baraja[Aleat2]
         
-        if (Aleat==1 && Aleat2 == 2){
+        if (Aleat==0 && (Aleat2 == 1 || Aleat2 == 2 || Aleat2 == 3 || Aleat2 == 4 || Aleat2 == 5 || Aleat2 == 6) ){
             //validar juego ganador
             let alerta = UIAlertController(title: "Felicidades", message: "Ganaste", preferredStyle: .alert)
             
-            let accionOK = UIAlertAction(title: "Volver a jugar", style: .default, handler: nil)
+            let accionOK = UIAlertAction(title: "Volver a jugar", style: .default){ _ in
+                self.Aleat  = Int.random(in: 1...9)
+                self.img1.image = self.baraja[self.Aleat]
+                self.img2.image = UIImage(named: "reverso")
+            }
             
             let accionApostar = UIAlertAction(title: "Apostar", style: .default) { _ in
                 print("apostando")
